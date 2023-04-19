@@ -6,56 +6,68 @@
 
 import csv
 
+from datetime import datetime, date
+import csv
+import matplotlib.pyplot as plt
 
-lista = list()
-listj = list()
 
-with open('coleta.csv', mode='r', encoding='utf-8') as arq:
-    leitor = csv.reader(arq, delimiter = ',') 
-    linhas = 0 
-    for coluna in leitor: 
-        if linhas == 0 :
+listah=list()
+listat=list()
+with open('coleta.csv', mode='r', encoding='utf8') as arq:
+
+    leitor = csv.reader(arq, delimiter=',')
+    linhas = 0
+    for coluna in leitor:
+        if linhas == 0:
             linhas += 1
-        else: 
+        else:
+           
             
-            print(f'\t{coluna[1]}')
-            print(f'\t{coluna[0]}')
+            linhas += 1
+            listah.append((coluna[0]))
+            linhas += 1
+            listat.append(int(coluna[1]))
+
+
             
-            linhas += 1
-            lista.append(int(coluna[1]))
-            linhas += 1
-            listj.append(int(coluna[1]))
+soma = sum(listat)
+
+maior= max(listat)
+print('O maior valor das temperaturas é : ',maior, 'ºC')
+
+menor= min(listat)
+print('O menor valor das temperaturas é : ',menor, 'ºC')
+
+media = soma/(len(listat))
+print('Essa é a média das temperaturas: ',round(media,2),'ºC')
+
+hoje= date.today().strftime('%d-%m-%y')
+print(hoje)
+
+arquivo = open  ('rel_temp.dat','w')
+arquivo.write("Lucas marioti machado")
+arquivo.write(f"\ndata:{hoje}")
+arquivo.write(f"\ntemperatura mais alta:{maior}")
+arquivo.write(f"\ntemperatura mais baixa:{menor}")
+arquivo.write(f"\ntemperatura média:{media}")
+
 arq.close()
-    
-arquivo = open("rel_temp.txt", "a")
-arquivo.write("Olá, mundo!")
+
+x = (listah)
+y = (listat)
+
+fig, ax = plt.subplots()
+
+ax.scatter(x, y)
+
+ax.set_xlabel('tempo')
+ax.set_ylabel('temperatura em graus')
+
+ax.set_title('temperatura no periodo de 12 hrs')
+
+plt.show()
 
 
-soma = sum(lista)
-
-temp_max = max(lista)
-print('Temperatura mais alta ' ,temp_max, '°C')
-
-temp_min = min(lista)
-print('Temperatura mais baixa: ' ,temp_min, '°C')
-
-temp_med = soma/(len(lista))
-
-print('Valores totais das Temperaturas: ' , round(temp_med,2), '°C')
-
-
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
 
 
 
