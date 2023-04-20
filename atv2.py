@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[28]:
-
-
 import csv
 
 from datetime import datetime, date
@@ -11,7 +5,7 @@ import csv
 import matplotlib.pyplot as plt
 
 
-listah=list()
+listac=list()
 listat=list()
 with open('coleta.csv', mode='r', encoding='utf8') as arq:
 
@@ -24,11 +18,9 @@ with open('coleta.csv', mode='r', encoding='utf8') as arq:
            
             
             linhas += 1
-            listah.append((coluna[0]))
+            listac.append((coluna[0]))
             linhas += 1
             listat.append(int(coluna[1]))
-
-
             
 soma = sum(listat)
 
@@ -45,15 +37,17 @@ hoje= date.today().strftime('%d-%m-%y')
 print(hoje)
 
 arquivo = open  ('rel_temp.dat','w')
-arquivo.write("Lucas marioti machado")
-arquivo.write(f"\ndata:{hoje}")
+arquivo.write("#'''''''''''''''''''''''''''''''''''''''#\n")
+arquivo.write("Diego Silva de Sousa")
+arquivo.write(f"\nData:{hoje}")
+arquivo.write(f"\ntemperatura média:{media}")
 arquivo.write(f"\ntemperatura mais alta:{maior}")
 arquivo.write(f"\ntemperatura mais baixa:{menor}")
-arquivo.write(f"\ntemperatura média:{media}")
+arquivo.write("\n#'''''''''''''''''''''''''''''''''''''''#")
 
 arq.close()
 
-x = (listah)
+x = (listac)
 y = (listat)
 
 fig, ax = plt.subplots()
@@ -66,9 +60,3 @@ ax.set_ylabel('temperatura em graus')
 ax.set_title('temperatura no periodo de 12 hrs')
 
 plt.show()
-
-
-
-
-
-
